@@ -94,7 +94,7 @@ app.post("/bands", async (req: Request, res: Response) => {
 
 app.put("/bands/:id", async (req: Request, res: Response) => {
     try {
-        const id = req.params.id
+        const idToEdit = req.params.id
 
         const newId = req.body.id
         const newName = req.body.name
@@ -127,7 +127,7 @@ app.put("/bands/:id", async (req: Request, res: Response) => {
 
         const [ band ] = await db.raw(`
             SELECT * FROM bands
-            WHERE id = "${id}";
+            WHERE id = "${idToEdit}";
         `) // desestruturamos para encontrar o primeiro item do array
 
         if (band) {
@@ -137,7 +137,7 @@ app.put("/bands/:id", async (req: Request, res: Response) => {
                     id = "${newId || band.id}",
                     name = "${newName || band.name}"
                 WHERE
-                    id = "${id}";
+                    id = "${idToEdit}";
             `)
         } else {
             res.status(404)
@@ -231,7 +231,7 @@ app.post("/songs", async (req: Request, res: Response) => {
 
 app.put("/songs/:id", async (req: Request, res: Response) => {
     try {
-        const id = req.params.id
+        const idToEdit = req.params.id
 
         const newId = req.body.id
         const newName = req.body.name
@@ -278,7 +278,7 @@ app.put("/songs/:id", async (req: Request, res: Response) => {
 
         const [ song ] = await db.raw(`
             SELECT * FROM songs
-            WHERE id = "${id}";
+            WHERE id = "${idToEdit}";
         `) // desestruturamos para encontrar o primeiro item do array
 
         if (song) {
@@ -289,7 +289,7 @@ app.put("/songs/:id", async (req: Request, res: Response) => {
                     name = "${newName || song.name}",
                     band_id = "${newBandId || song.band_id}"
                 WHERE
-                    id = "${id}";
+                    id = "${idToEdit}";
             `)
         } else {
             res.status(404)
