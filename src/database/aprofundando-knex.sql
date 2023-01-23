@@ -26,5 +26,3 @@ VALUES
     ("s003", "Uma carta", "b002"),
     ("s004", "All the small things", "b001"),
     ("s005", "I miss you", "b001");
-
-DELETE FROM bands WHERE id = "b004";
